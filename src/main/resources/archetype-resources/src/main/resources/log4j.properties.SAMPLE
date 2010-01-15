@@ -3,4 +3,4 @@ log4j.logger.${package} = DEBUG
 
 log4j.appender.console = org.apache.log4j.ConsoleAppender
 log4j.appender.console.layout = org.apache.log4j.PatternLayout
-log4j.appender.console.layout.conversionPattern = %d [%-5p] %-20.20c{1}: %m%n
+log4j.appender.console.layout.conversionPattern = [%-5p] %d{yyyy/MM/dd HH:mm:ss} %c{1} (%.5t): %m%n
