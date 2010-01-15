@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor name="fiftyfive-web-archetype">
+  <requiredProperties>
+    <requiredProperty key="project_name"/>
+  </requiredProperties>
+  <fileSets>
+    <fileSet filtered="true" packaged="true" encoding="UTF-8">
+      <directory>src/main/java</directory>
+      <includes>
+        <include>**/*.java</include>
+        <include>**/*.html</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" packaged="true" encoding="UTF-8">
+      <directory>src/test/java</directory>
+      <includes>
+        <include>**/*.java</include>
+        <include>**/*.html</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/main/webapp</directory>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/main/resources</directory>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>src/test/resources</directory>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>
