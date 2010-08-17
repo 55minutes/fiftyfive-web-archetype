@@ -31,7 +31,7 @@
   <!-- ==================================================================== -->
 
   <properties>
-    <slf4j.version>1.6.0</slf4j.version>
+    <slf4j.version>1.6.1</slf4j.version>
   </properties>
 
   <dependencies>
@@ -185,7 +185,7 @@
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>maven-jetty-plugin</artifactId>
-        <version>6.1.24</version>
+        <version>6.1.25</version>
         <configuration>
           <systemProperties>
             <!-- <systemProperty>
