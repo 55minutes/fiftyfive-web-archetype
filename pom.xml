@@ -36,6 +36,12 @@
         <artifactId>archetype-packaging</artifactId>
         <version>2.0-alpha-4</version>
       </extension>
+      <!-- Enables mvn deploy with scpexe:// target -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh-external</artifactId>
+        <version>1.0</version>
+      </extension>
     </extensions>
     <plugins>
       <plugin>
@@ -53,19 +59,6 @@
       </plugin>
     </plugins>
   </build>
-
-
-  <!-- ==================================================================== -->
-  <!-- Deployment Configuration                                             -->
-  <!-- ==================================================================== -->
-
-  <distributionManagement>
-    <repository>
-      <id>fiftyfive-internal</id>
-      <name>55 Minutes Maven Repository</name>
-      <url>https://internal.55minutes.com/archiva/repository/fiftyfive-opensource/</url>
-    </repository>
-  </distributionManagement>
 
 
 </project>
