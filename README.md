@@ -12,6 +12,8 @@ This archetype generates a simple Java web project with these features:
 * Basic log4j.properties
 * A trivial servlet to get you started
 
+Note that this archetype does not prescribe a specific Java web framework. If you're looking for a full-fledged bootstrap for Apache Wicket in particular, consider using the archetype included in our [fiftyfive-wicket](https://github.com/55minutes/fiftyfive-wicket) project.
+
 ## Quickstart
 
 Try it out!
