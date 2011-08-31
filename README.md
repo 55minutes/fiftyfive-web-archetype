@@ -4,9 +4,9 @@
 
 This archetype generates a simple Java web project with these features:
 
-* A nicely organized POM file the plays nice with maven 3.0
+* A clean, organized POM file the plays nice with maven 3.0
 * Java 6 by default
-* `mvn jetty:run` support
+* `mvn jetty:run` support for easy local development
 * Works on [Heroku](http://blog.heroku.com/archives/2011/08/25/java/) out of the box
 * JUnit, Mockito, slf4j and log4j dependencies
 * Basic log4j.properties
@@ -30,7 +30,7 @@ Your app will be running on http://localhost:8080/.
 
 ## Bonus: Deploy to Heroku!
 
-These instructions assume you already have a [free Heroku account](http://www.heroku.com/) and have installed the `heroku` gem.
+These instructions assume you already have a [free Heroku account](http://www.heroku.com/) and have `heroku` and `git` installed.
 
 Within the generated project directory:
 
