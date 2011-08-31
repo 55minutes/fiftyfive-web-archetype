@@ -8,6 +8,7 @@
       <directory></directory>
       <includes>
         <include>.gitignore</include>
+        <include>Procfile</include>
       </includes>
     </fileSet>
     <fileSet filtered="true" packaged="true" encoding="UTF-8">

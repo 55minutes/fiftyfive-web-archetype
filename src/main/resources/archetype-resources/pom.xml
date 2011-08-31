@@ -13,7 +13,12 @@
   <groupId>${groupId}</groupId>
   <artifactId>${artifactId}</artifactId>
   <version>${version}</version>
-  <packaging>war</packaging>
+  <!-- Note that although this is a web project, we package as a JAR to     -->
+  <!-- facilitate heroku deployment. You can still build a WAR version of   -->
+  <!-- this app by running `mvn war:war`. Or change the packaging value to  -->
+  <!-- "war" if you have no intention of "container-less" deployment.       -->
+  <!-- See: http://blog.heroku.com/archives/2011/08/25/java/                -->
+  <packaging>jar</packaging>
 
 
   <!-- ==================================================================== -->
@@ -31,7 +36,8 @@
   <!-- ==================================================================== -->
 
   <properties>
-    <slf4j.version>1.6.1</slf4j.version>
+    <jetty.version>7.4.5.v20110725</jetty.version>
+    <slf4j.version>1.6.2</slf4j.version>
   </properties>
 
   <dependencies>
@@ -42,11 +48,17 @@
       <artifactId>slf4j-api</artifactId>
       <version>${symbol_dollar}{slf4j.version}</version>
     </dependency>
+    <!-- jetty is needed for our Main class, which facilitates deploying   -->
+    <!-- as a purely standalone, "container-less" app.                     -->
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-webapp</artifactId>
+      <version>${symbol_dollar}{jetty.version}</version>
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.5</version>
-      <scope>provided</scope>
     </dependency>
     
     <!-- ==== Runtime dependencies ======================================== -->
@@ -126,6 +138,20 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addDefaultImplementationEntries>
+                true
+              </addDefaultImplementationEntries>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>2.7</version>
         <configuration>
@@ -176,10 +202,37 @@
           </archive>
         </configuration>
       </plugin>
+      <!-- appassembler produces a cross-platform shell script that runs    -->
+      <!-- our webapp in standalone mode. This code was taken from:         -->
+      <!-- http://blog.heroku.com/archives/2011/08/25/java/                 -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>1.1.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>assemble</goal>
+            </goals>
+            <configuration>
+              <assembleDirectory>target</assembleDirectory>
+              <generateRepository>false</generateRepository>
+              <programs>
+                <program>
+                  <mainClass>${package}.Main</mainClass>
+                  <name>webapp</name>
+                </program>
+              </programs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Enables `mvn jetty:run` -->
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
-        <artifactId>maven-jetty-plugin</artifactId>
-        <version>6.1.26</version>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${symbol_dollar}{jetty.version}</version>
         <configuration>
           <systemProperties>
             <!-- <systemProperty>
@@ -189,7 +242,7 @@
           </systemProperties>
           <reload>manual</reload>
           <webAppConfig>
-            <contextPath>/${symbol_dollar}{project.artifactId}</contextPath>
+            <contextPath>/</contextPath>
             <extraClasspath>${symbol_dollar}{basedir}/</extraClasspath>
           </webAppConfig>
         </configuration>
